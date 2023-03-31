@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
+import { HttpClientModule } from "@angular/common/http";
 
 // Angular Material
 import { MatSidenavModule } from "@angular/material/sidenav";
@@ -28,6 +29,7 @@ import { CartComponent } from "./pages/cart/cart.component";
 
 // Services
 import { CartService } from "./services/cart.service";
+import { StoreService } from "./services/store.service";
 
 @NgModule({
   declarations: [
@@ -55,8 +57,9 @@ import { CartService } from "./services/cart.service";
     MatBadgeModule,
     MatSnackBarModule,
     MatListModule,
+    HttpClientModule,
   ],
-  providers: [CartService],
+  providers: [CartService, StoreService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
