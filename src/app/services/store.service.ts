@@ -11,11 +11,24 @@ const STORE_BASE_URL = "https://fakestoreapi.com";
 export class StoreService {
   constructor(private httpClient: HttpClient) {}
 
-  getAllProducts(limit = "12", sort = "desc"): Observable<Array<Product>> {
+  getAllProducts(
+    limit = "12",
+    sort = "desc",
+    category?: string
+  ): Observable<Array<Product>> {
     const params = new HttpParams().set("sort", sort).set("limit", limit);
 
-    return this.httpClient.get<Array<Product>>(`${STORE_BASE_URL}/products`, {
-      params,
-    });
+    return this.httpClient.get<Array<Product>>(
+      `${STORE_BASE_URL}/products${category ? "/category/" + category : ""}`,
+      {
+        params,
+      }
+    );
+  }
+
+  getAllCategories(): Observable<Array<string>> {
+    return this.httpClient.get<Array<string>>(
+      `${STORE_BASE_URL}/products/categories`
+    );
   }
 }
